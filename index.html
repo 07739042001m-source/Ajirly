@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>اجرلي</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#06687A">
+<link rel="apple-touch-icon" href="icon-192.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap">
 <style>
 :root{--bg:#F3F6F6;--card:#fff;--ink:#10222A;--mute:#5B6E75;--line:#DCE4E6;--brand:#06687A;--accent:#FF9F33;--warn:#FFE9D2;--warnink:#7A3B00;--bad:#B3261E;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -123,6 +126,7 @@ if(ph.replace(/\D/g,'').length<10)return $('err').textContent='رقم الهات
 if(!uid)return $('err').textContent='جاري الاتصال، جرّب بعد ثواني.';
 $('save').disabled=true;
 db.collection('listings').add({type:$('f-type').value,title:t,price:p,gov:$('f-gov').value,area:a,phone:ph,note:$('f-note').value.trim(),ownerId:uid,createdAt:firebase.firestore.FieldValue.serverTimestamp()}).then(function(){['f-title','f-price','f-area','f-phone','f-note'].forEach(function(i){$(i).value=''});$('dlg').close();toast('تم نشر الإعلان')}).catch(function(){$('err').textContent='تعذر النشر. تأكد من الإنترنت وجرّب مرة ثانية.'}).then(function(){$('save').disabled=false})};
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(function(){});
 chips();render();
 firebase.initializeApp({apiKey:"AIzaSyD4J9xy2lP9ABTep8EFod4s9ipszXv5fow",authDomain:"ajerly-405e8.firebaseapp.com",projectId:"ajerly-405e8",storageBucket:"ajerly-405e8.firebasestorage.app",messagingSenderId:"267850292226",appId:"1:267850292226:web:d0555827f6f9aa4fe89b1b"});
 db=firebase.firestore();
